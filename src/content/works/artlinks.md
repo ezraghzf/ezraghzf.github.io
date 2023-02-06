@@ -2,7 +2,7 @@
 title: "Artlinks"
 description: "A platform for artists to share their work."
 details: true
-updatedDate: "Sep 11 2022"
+updatedDate: "Feb 07 2023"
 heroImage: "/images/works/artlinks.jpg"
 ---
 
