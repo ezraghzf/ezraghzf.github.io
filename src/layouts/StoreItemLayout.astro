@@ -1,10 +1,10 @@
 ---
-import { StoreSchema } from "../content/config";
+import { WorksSchema } from "../content/config";
 import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
-export interface Props extends StoreSchema {}
+export interface Props extends WorksSchema {}
 
 const {
   title,
@@ -33,10 +33,10 @@ const displayDate = dayjs(updatedDate).format("ll");
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h1>
         <div class="flex place-content-between items-center">
-          <div class="grow md:grow-0">
+          <!-- <div class="grow md:grow-0">
             <span class="text-xl mr-1"> {pricing}</span>
             <span class="text-md opacity-50 line-through">{oldPricing}</span>
-          </div>
+          </div> -->
           <div>
             {
               custom_link && (
@@ -45,7 +45,7 @@ const displayDate = dayjs(updatedDate).format("ll");
                 </a>
               )
             }
-            <a class="btn btn-primary grow md:grow-0 ml-4" href={checkoutUrl} target="_blank">Buy Now</a>
+            <!-- <a class="btn btn-primary grow md:grow-0 ml-4" href={checkoutUrl} target="_blank">Buy Now</a> -->
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ const displayDate = dayjs(updatedDate).format("ll");
         updatedDate && (
           <div>
             {" "}
-            Last updated on <time>{displayDate}</time>{" "}
+            Published on <time>{displayDate}</time>{" "}
           </div>
         )
       }

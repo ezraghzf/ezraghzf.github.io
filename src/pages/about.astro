@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
+---
+
+<BaseLayout title = "Resume">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Profile</div>
+  </div>
+
+  <div class="mb-10 text-justify">
+    I am a Bachelor in Computer Science with 2 years of experience with backend and frontend software development. 
+    I have great passion in frontend web design and development, combined with my knowledge with graphic design tools for design and image creation.
+    I am looking to gain experience in a professional environment whilst learning new technologies.
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Education</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="Bachelor of Computer Science"
+      subtitle="2015 to 2022 at BINUS University, Tangerang, Indonesia"
+    />
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Experience</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="PT. Accelist Lentera Indonesia, Full Stack Developer"
+      subtitle="From 2018 to 2019"
+      desc="System multiplatform that includes the steps of a company's personnel, the structure and composition thereof, as well as a powerful designer of credentials and module of control of access. Outspread at the MINFAR and another entities of the country. Technologies: C++, Qt Framework, Subversión, Visual Paradigm, PostgreSQL, Jmeter"
+    >
+    Joined as part of Binus University's 3+1 Internship program. Outsourced to PT. Toyota Astra Motor as a full stack software developer to develop Toyota’s logistics system.
+    <ul class="list-disc ml-4 my-2">
+      <li>Create systems based on business modules.</li>
+      <li>Create frontend pages for a business module based on design document</li>
+      <li>Create backend logic, including database queries for the same module that is connected via REST API.</li>
+      <li>Tech Stack: HTML, Typescript, C#, ASP.NET Core, AngularJS and SQL Server.</li>
+    </ul>
+  </TimeLineElement>
+    <TimeLineElement
+      title="Artlinks, Freelance Frontend Developer"
+      subtitle="From 2020 to 2021"
+    >
+    I worked with Artlinks, a startup project aiming to create a platform for artists to share their work. Remote work due to COVID-19 pandemic.
+    <ul class="list-disc ml-4 my-2">
+      <li>Create a responsive website front-end using Vue.js based on client’s design.</li>
+      <li>Helped input some page design with the designer.</li>
+      <li>Tech Stack: HTML, SCSS, Javascript, Vue.js</li>
+    </ul>   
+    </TimeLineElement>
+  </div>
+
+  <!-- <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Certifications</div>
+  </div> -->
+
+  <!-- <ul class="list-disc mx-6 mb-10 grid gap-2">
+    <li>
+      <a href="https://www.efset.org/cert/DxtNKG" target="_blank"> EF SET English Certificate 74/100 (C2 Proficient)</a>
+    </li>
+    <li>
+      <a href="https://certiprof.com/pages/scrum-foundation-professional-certificate-sfpc-en-sp" target="_blank"> Scrum Foundation Professional Certificate (SFPC)</a>
+    </li>
+  </ul> -->
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Skills</div>
+  </div>
+
+  <ul class="list-disc md:columns-5 columns-2 mx-6 gap-8">
+    <li>Indonesian (native)</li>
+    <li>English (expert)</li>
+    <li>Japanese (beginner)</li>
+    <li>HTML & CSS</li>
+    <li>JavaScript</li>
+    <li>Typescript</li>
+    <li>SCSS</li>
+    <li>Bootstrap</li>
+    <li>jQuery</li>
+    <li>Node.js</li>
+    <li>Vue.js</li>
+    <li>AngularJS</li>
+    <li>C#</li>
+    <li>ASP.NET Core</li>
+    <li>SQL</li>
+    <li>MySQL</li>
+    <li>Git</li>
+    <li>Figma</li>
+    <li>Adobe Photoshop</li>
+    <li>Office Suite</li>
+    <li>Sony Vegas</li>
+  </ul>
+</BaseLayout>

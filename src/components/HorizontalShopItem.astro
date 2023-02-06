@@ -22,13 +22,9 @@ const {
         {title}
         {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
       </h1>
-      <div>
-        <span class="text-xl mr-1"> {pricing}</span>
-        <span class="text-md opacity-50 line-through">{oldPricing}</span>
-      </div>
       <p class="py-1 text-1xl">{desc}</p>
       <div class="card-actions md:justify-end mt-3 md:mt-0 flex">
-        <a class="btn btn-primary grow md:grow-0" href={checkoutUrl} target="_blank">Buy</a>
+        <!-- <a class="btn btn-primary grow md:grow-0" href={"checkoutUrl"} target="_blank">Buy</a> -->
         {
           custom_link && (
             <a href={custom_link} target="_blank" class="btn btn-outline grow md:grow-0">
@@ -38,7 +34,7 @@ const {
         }
         {
           details && (
-            <a href={url} class="btn btn-outline grow md:grow-0">
+            <a href={url} class="btn btn-primary grow md:grow-0">
               Details
             </a>
           )

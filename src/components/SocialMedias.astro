@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { iconPaths } from "./IconPaths";
+
+export interface Props {
+    icon: keyof typeof iconPaths;
+    title: string;
+    link: string;
+}
+
+const { icon, title, link} = Astro.props
+const iconPath = iconPaths[icon];
+
+---
+    <a
+      href={link}
+      target="_blank"
+      class="mx-3 hover:shadow-xl transition ease-in-out hover:scale-[110%]"
+      aria-label="Twitter"
+      title={title}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        style="fill: currentColor;transform: ;msFilter:;"
+        set:html={iconPath}
+        >
+      </svg>
+    </a>
+    

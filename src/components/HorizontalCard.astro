@@ -12,7 +12,7 @@ const { title, img, desc, url, badge, tags, target = '_blank' } = Astro.props;
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h1>
         <p class="py-1 text-1xl">{desc}</p>
-        <div class="card-actions justify-end">
+        <div class="card-actions justify-end mt-4">
           {tags && tags.map((tag) => <div class="badge badge-outline">{tag}</div>)}
         </div>
       </div>

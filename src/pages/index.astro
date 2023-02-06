@@ -1,76 +1,107 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import HorizontalShopItem from "../components/HorizontalShopItem.astro";
+import SocialMedias from "../components/SocialMedias.astro";
+import {socialMedias} from "../datas/socialMedias"
+import Icon from "../components/Icon.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const featuredWorksSlugs = ["online-library" , "artlinks"]
+const featuredWorks = (await getCollection("works")).filter(
+  (work) => featuredWorksSlugs.includes(work.slug)
 );
 
 const last_posts = posts.slice(0, 3);
+const techs = ["Vue.js", "Angular", "Javascript", "Typescript","SCSS", "C#", "ASP.NET", "SQL", "Git", "Figma" ]
 ---
 
 <BaseLayout>
-
-    <div class="pb-12 mt-5">
-      <div class="text-xl py-1">Hey there 👋</div>
-      <div class="text-5xl font-bold">I'm Manuel Ernesto</div>
-      <div class="text-3xl py-3 font-bold">Software Engineer and Entrepreneur</div>
-      <div class="py-2">
-        <text class="text-lg">
-          I made this template for everyone who needs to create a personal website easily and quickly. This template includes Project Section, CV Section, Store, Paginated Blog, RSS Feed, SEO Friendly, Responsive Desing and 29 Visual themes. I hope you find it useful!
-          </text
-        >
-      </div>
-      <div class="mt-8">
-        <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
-        <a href="https://github.com/manuelernestog/astro-modern-personal-website" target="_blank" class="btn btn-outline ml-5"> Get This template</a>
-      </div>
+  <div class="my-8 md:mt-8">
+    <div class="text-xl py-1">Halo! 👋</div>
+    <div class="text-5xl font-bold mb-8">I'm R.M. Ezra Ghaziafi</div>
+    <div class="text-3xl mb-3 font-bold">Software Developer</div>
+    <div class="py-2">
+      <text class="text-lg">
+        I am an aspiring Software Developer looking to code and learn new technologies. Based in Indonesia 🇮🇩.
+      </text>
     </div>
-
-    <div>
-      <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+    <div class="mt-8">
+      <div class="social-icons my-2 flex self-center">{
+        socialMedias.map((socMed) => (
+          <SocialMedias icon={socMed.icon} link={socMed.link} title={socMed.title} />
+        ))
+      }</div>
+      
+      
     </div>
+  </div>
+  <img src="/images/man.png" alt="" srcset="">
+  <div class="divider mt-0"></div> 
+  <div class="py-4 mb-8 text-center">
+    <h2 class="text-3xl py-3 font-bold">My name is Ezra.</h2>
+    <p class="text-lg">I am a Fresh Graduate from Binus University. 
+      I've always been interested in programming since I was litle and learned a lot from self-study. 
+      My interest and curiosity in web development has led me to learn new technologies and things.
+      I'm always working to improve myself and looking forward to solve problems, one software at a time.
+    </p>
+  </div>
 
-    <HorizontalCard
-      title="Demo Project 1"
-      img="/post_img.webp"
-      desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      url="#"
-      badge="NEW"
-    />
-    <div class="divider my-0"></div>
-    <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-    <div class="divider my-0"></div>
-    <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
+  <div>
+    <div class="text-3xl w-full font-bold mb-8">My Skills</div>
+  </div>
 
+  <div class="rounded-lg grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-neutral mb-8">
+   {
+      techs.map((skill) => (
+      <div class="bg-base-300 rounded-lg p-2 text-xl text-center font-bold">
+        {skill}</div>
+      ))
+   }
+  </div>
 
-    <div>
-      <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-    </div>
+  <div>
+    <div class="text-3xl w-full font-bold mb-8">My Works {"</>"}</div>
+  </div>
+  {
+    featuredWorks.map((item) => (
+      <>
+      <HorizontalShopItem
+            title={item.data.title}
+            img={item.data.heroImage}
+            desc={item.data.description}
+            badge={item.data.badge}
+            details={item.data.details}
+            tags={item.data.tags}
+            url={"/works/" + item.slug}
+            custom_link={item.data.custom_link}
+            custom_link_label={item.data.custom_link_label}
+          />
+          <div class="divider my-0" />
+      </>
+    ))
+  }
 
-    {
-      last_posts.map((post) => (
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+  </div>
+
+  {
+    last_posts.map((post) => (
+      <>
         <HorizontalCard
           title={post.data.title}
           img={post.data.heroImage}
           desc={post.data.description}
           url={"/blog/" + post.slug}
           target="_self"
+          tags={post.data.tags}
         />
-        <div class="divider my-0"></div>
-      ))
-    }
-
+        <div class="divider my-0" />
+      </>
+    ))
+  }
 </BaseLayout>

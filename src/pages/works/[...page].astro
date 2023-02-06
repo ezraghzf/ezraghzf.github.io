@@ -4,28 +4,25 @@ import HorizontalShopItem from "../../components/HorizontalShopItem.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths({ paginate }) {
-  const items = await getCollection("store");
+  const items = await getCollection("works");
   return paginate(items, { pageSize: 10 });
 }
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Store">
+<BaseLayout title="Works">
   <ul>
     {
       page.data.map((item) => (
         <>
           <HorizontalShopItem
             title={item.data.title}
-            img={item.data.heroImage}
+            img={item.data.thumbImage}
             desc={item.data.description}
-            pricing={item.data.pricing}
-            oldPricing={item.data.oldPricing}
-            checkoutUrl={item.data.checkoutUrl}
             badge={item.data.badge}
             details={item.data.details}
             tags={item.data.tags}
-            url={"/store/" + item.slug}
+            url={"/works/" + item.slug}
             custom_link={item.data.custom_link}
             custom_link_label={item.data.custom_link_label}
           />

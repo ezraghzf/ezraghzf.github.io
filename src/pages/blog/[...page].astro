@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import HorizontalCard from "../../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 
+let tags = new Array("");
 export async function getStaticPaths({ paginate }) {
   const posts = await getCollection("blog");
   return paginate(posts, { pageSize: 10 });
@@ -12,6 +13,12 @@ const { page } = Astro.props;
 ---
 
 <BaseLayout title="Blog">
+
+  <div class="mb-5">
+    <h1 class="text-3xl w-full font-bold mb-5">Blog Posts</h1>
+    <p>I write about things related to technology and things I learned.</p>
+  </div>
+  
   <ul>
     {
       page.data.map((post) => (
@@ -22,6 +29,7 @@ const { page } = Astro.props;
             desc={post.data.description}
             url={"/blog/" + post.slug}
             target="_self"
+            tags={post.data.tags}
           />
           <div class="divider my-0" />
         </>
