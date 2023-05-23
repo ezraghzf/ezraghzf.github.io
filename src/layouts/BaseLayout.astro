@@ -2,28 +2,79 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-
+import SocialMedias from "../components/SocialMedias.astro";
+import { socialMedias } from "../datas/socialMedias";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
-const { image, title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const {
+  image,
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+} = Astro.props;
+
+const textLinks: { label: string; href: string }[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Works", href: "/works" },
+  { label: "Blog", href: "/blog" },
+];
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en" data-theme="night" class="h-screen scroll-smooth">
   <head>
     <BaseHead title={title} description={description} image={image} />
   </head>
-  <body>
-    <div class="bg-base-100 drawer drawer-mobile">
+  <body class="bg-base-100">
+    <div class="drawer bg-base-100">
+      <!-- h-screen snap-y scroll-smooth snap-proximity overflow-auto -->
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col bg-base-100">
-        <Header title={SITE_TITLE} />
-        <div class="md:flex md:justify-center">
-          <main class="p-6 pt-10 max-w-[900px]">
-            <slot />
-          </main>
+      <div
+        class="drawer-content flex flex-col bg-base-100 scroll-smooth h-screen overflow-auto"
+      >
+        <Header title={SITE_TITLE} textLinks={textLinks} />
+        <!-- <div class="md:flex md:justify-center"> -->
+        <div
+          class="invisible md:visible fixed bottom-10 left-4 flex flex-col gap-5"
+        >
+          {
+            socialMedias.map((socMed) => (
+              <SocialMedias
+                icon={socMed.icon}
+                link={socMed.link}
+                title={socMed.title}
+              />
+            ))
+          }
         </div>
+        <main class="mx-auto px-12 max-w-screen-md scroll-smooth">
+          <slot />
+        </main>
         <Footer />
+      </div>
+      <div class="drawer-side">
+        <label for="my-drawer" class="drawer-overlay"></label>
+        <ul class="menu p-4 w-80 bg-base-100 gap-2">
+          {
+            textLinks.map(({ label, href }) => (
+              <li>
+                <a
+                  aria-current={Astro.url.pathname === href}
+                  class:list={[
+                    {
+                      active:
+                        Astro.url.pathname === href ||
+                        (href !== "/" && Astro.url.pathname.startsWith(href)),
+                    },
+                  ]}
+                  href={href}
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </div>
   </body>

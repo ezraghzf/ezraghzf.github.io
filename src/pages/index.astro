@@ -3,73 +3,120 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import HorizontalShopItem from "../components/HorizontalShopItem.astro";
 import SocialMedias from "../components/SocialMedias.astro";
-import {socialMedias} from "../datas/socialMedias"
+import { socialMedias } from "../datas/socialMedias";
 import Icon from "../components/Icon.astro";
 import { getCollection } from "astro:content";
+import ScrollDown from "../components/ScrollDown.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-const featuredWorksSlugs = ["online-library" , "artlinks"]
-const featuredWorks = (await getCollection("works")).filter(
-  (work) => featuredWorksSlugs.includes(work.slug)
+const featuredWorksSlugs = ["online-library", "artlinks"];
+const featuredWorks = (await getCollection("works")).filter((work) =>
+  featuredWorksSlugs.includes(work.slug)
 );
 
 const last_posts = posts.slice(0, 3);
-const techs = ["Vue.js", "Angular", "Javascript", "Typescript","SCSS", "C#", "ASP.NET", "SQL", "Git", "Figma" ]
+const techs = [
+  "Vue.js",
+  "Angular",
+  "Javascript",
+  "Typescript",
+  "SCSS",
+  "C#",
+  "ASP.NET",
+  "SQL",
+  "Git",
+  "Figma",
+];
 ---
 
 <BaseLayout>
-  <div class="my-8 md:mt-8">
-    <div class="text-xl py-1">Halo! 👋</div>
-    <div class="text-5xl font-bold mb-8">I'm R.M. Ezra Ghaziafi</div>
-    <div class="text-3xl mb-3 font-bold">Software Developer</div>
-    <div class="py-2">
-      <text class="text-lg">
-        I am an aspiring Software Developer looking to code and learn new technologies. Based in Indonesia 🇮🇩.
-      </text>
+  <section
+    class="min-h-screen flex flex-col items-center justify-center snap-start relative mt-[navbar-padding]"
+    id="main"
+  >
+    <div class="flex flex-shrink flex-col">
+      <div class="text-xl py-1">Halo! 👋</div>
+      <div class="text-4xl md:text-6xl font-bold mb-8">
+        I'm R.M. Ezra Ghaziafi
+      </div>
+      <div class="text-3xl mb-3 font-bold">Software Developer</div>
+      <div class="py-2">
+        <text class="text-lg">
+          I am an aspiring Software Developer looking to code and learn new
+          technologies. Based in Indonesia 🇮🇩.
+        </text>
+      </div>
+      <div class="mt-8 md:invisible">
+        <div class="social-icons my-2 gap-5 flex self-center">
+          {
+            socialMedias.map((socMed) => (
+              <SocialMedias
+                icon={socMed.icon}
+                link={socMed.link}
+                title={socMed.title}
+              />
+            ))
+          }
+        </div>
+      </div>
+      <!-- <div class="gradient-container">
+        <div class="gradient-slide">
+          {Array.from(Array(240), (_, i) => <span />)}
+        </div>
+      </div> -->
     </div>
-    <div class="mt-8">
-      <div class="social-icons my-2 flex self-center">{
-        socialMedias.map((socMed) => (
-          <SocialMedias icon={socMed.icon} link={socMed.link} title={socMed.title} />
-        ))
-      }</div>
-      
-      
+    <ScrollDown href="#about" />
+  </section>
+
+  <!-- <div class="divider mt-0"></div> -->
+  <section
+    id="about"
+    class="min-h-screen flex flex-col items-center justify-center snap-start relative"
+  >
+    <div>
+      <div class="py-4 mb-8">
+        <div>
+          <h2 class="text-3xl py-3 font-bold">My name is Ezra.</h2>
+          <p class="text-lg">
+            I am a Fresh Graduate from Binus University. I've always been
+            interested in programming since I was little and learned a lot from
+            self-study. My interest and curiosity in web development has led me
+            to learn new technologies and things. I'm always working to improve
+            myself and looking forward to solve problems, one software at a
+            time.
+          </p>
+        </div>
+      </div>
+      <div class="">
+        <div>
+          <div class="text-3xl w-full font-bold mb-8">My Skills</div>
+        </div>
+        <div
+          class="rounded-lg grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-neutral mb-8"
+        >
+          {
+            techs.map((skill) => (
+              <div class="bg-base-300 rounded-lg p-2 text-xl text-center font-bold">
+                {skill}
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </div>
-  </div>
-  <img src="/images/man.png" alt="" srcset="">
-  <div class="divider mt-0"></div> 
-  <div class="py-4 mb-8 text-center">
-    <h2 class="text-3xl py-3 font-bold">My name is Ezra.</h2>
-    <p class="text-lg">I am a Fresh Graduate from Binus University. 
-      I've always been interested in programming since I was litle and learned a lot from self-study. 
-      My interest and curiosity in web development has led me to learn new technologies and things.
-      I'm always working to improve myself and looking forward to solve problems, one software at a time.
-    </p>
-  </div>
+    <ScrollDown href="#works" />
+  </section>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-8">My Skills</div>
-  </div>
-
-  <div class="rounded-lg grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-neutral mb-8">
-   {
-      techs.map((skill) => (
-      <div class="bg-base-300 rounded-lg p-2 text-xl text-center font-bold">
-        {skill}</div>
-      ))
-   }
-  </div>
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-8">My Works {"</>"}</div>
-  </div>
-  {
-    featuredWorks.map((item) => (
-      <>
-      <HorizontalShopItem
+  <section class="snap-start scroll-mt-20 mt-20" id="works">
+    <div>
+      <div class="text-3xl w-full font-bold mb-8">My Works</div>
+    </div>
+    {
+      featuredWorks.map((item) => (
+        <>
+          <HorizontalShopItem
             title={item.data.title}
             img={item.data.heroImage}
             desc={item.data.description}
@@ -81,27 +128,28 @@ const techs = ["Vue.js", "Angular", "Javascript", "Typescript","SCSS", "C#", "AS
             custom_link_label={item.data.custom_link_label}
           />
           <div class="divider my-0" />
-      </>
-    ))
-  }
+        </>
+      ))
+    }
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
+    <div>
+      <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+    </div>
 
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + post.slug}
-          target="_self"
-          tags={post.data.tags}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+    {
+      last_posts.map((post) => (
+        <>
+          <HorizontalCard
+            title={post.data.title}
+            img={post.data.heroImage}
+            desc={post.data.description}
+            url={"/blog/" + post.slug}
+            target="_self"
+            tags={post.data.tags}
+          />
+          <div class="divider my-0" />
+        </>
+      ))
+    }
+  </section>
 </BaseLayout>
